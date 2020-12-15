@@ -6,19 +6,20 @@ from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
 
 #setting up the title of the application and the subtitle
-st.title('Interactive Dashboard of Best Fiends and Best Fiends Stars 🐌')
-st.sidebar.title('Interactive Dashboard of Best Fiends and Best Fiends Stars 🐌')
+st.title('Interactive Dashboard 🐌')
+st.sidebar.title('Interactive Dashboard 🐌')
 
 st.markdown('This application is a small project I created to analyse the sentiment of comments and games ratings 🐌, data source is Google PLay🤖')
 st.sidebar.markdown('This application is a small project I created to analyse the sentiment of comments and games ratings 🐌, data source is Google PLay🤖')
 
 #Upload the data to the application
-DATA_URL = ("C:\Data_practice_projects\Mobile_game_analysis\Best_fiends_sentement.csv")
+DATA_URL = ("here you pick the data by navegating into the data folder")
 
 @st.cache(persist=True)
 def load_data():
     data = pd.read_csv(DATA_URL)
-    #data['at'] = pd.to_datetime(data['at'])
+    #this code used in case you have a date: 
+    #     data['at'] = pd.to_datetime(data['at'])
     return data
 
 data = load_data()
@@ -49,7 +50,7 @@ if not st.sidebar.checkbox('Hide reviews Chart', True):
 
 #Creating a side bar to pick the right game you want to show in a chart 
 st.sidebar.subheader('Breakdown reviews by games title')
-choice = st.sidebar.multiselect('Pick Game Title', ('Best Fiends', 'Best Fiends Stars'), key = '0')
+choice = st.sidebar.multiselect('Pick Game Title', ('name_of_game1', 'name_of_game2'), key = '0')
 
 #Using the if to link the charts to the side bar of games which will be used for comparision also 
 if len(choice) > 0:
@@ -61,7 +62,7 @@ if len(choice) > 0:
     
 
 #Uloading diffrent data to the application
-DATA_URL_month = ("C:\Data_practice_projects\Mobile_game_analysis\Best_fiends_monthly_results.csv")
+DATA_URL_month = ("here you pick the data by navegating into the data folder")
 def load_data():
     data_month = pd.read_csv(DATA_URL_month)
     return data_month
@@ -91,6 +92,7 @@ if not st.sidebar.checkbox('Hide Rating Charts', True):
 if st.sidebar.checkbox('Show raw data monthly', False):
     st.write(data_month)
 
+## This code is used in case you have a Latitude and a Longitude
 
 #st.sidebar.subheader('when and where are users tweeting from?')
 #hour = st.sidebar.slider('Hour of day', 0, 23)
@@ -106,14 +108,14 @@ if st.sidebar.checkbox('Show raw data monthly', False):
 
 
 #Break down the data frame into 2 based ona give string value
-best_fiends = data[(data['appId'] == "Best Fiends")]
-best_fiends_stars = data[(data['appId'] == "Best Fiends Stars")]
+name_of_game1 = data[(data['appId'] == "name_of_game1")]
+name_of_game2 = data[(data['appId'] == "name_of_game1")]
 
 #Creating a side bar about word cloud and slect by sentiment
 st.sidebar.subheader('Word Cloud Chart')
 
 word_sentiment = st.sidebar.radio('Display word cloud for what sentiment?', ('Positive', 'Neutral', 'Negative'))
-select_game = st.sidebar.multiselect('Pick Game Title for Word Cloud', ('Best Fiends', 'Best Fiends Stars'), key = '0')
+select_game = st.sidebar.multiselect('Pick Game Title for Word Cloud', ('name_of_game1', 'name_of_game2'), key = '0')
 
 #Let you select the chart of word cloud per a game
 if not st.sidebar.checkbox('Close', True, key = '3'):
